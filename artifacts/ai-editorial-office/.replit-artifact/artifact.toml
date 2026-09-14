@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AI-редакция — прототип"
+description = "Рабочий прототип интерфейса AI-редакции с контрактным mock-слоем S09, очередью задач, пакетами к рассмотрению, решениями редактора, радарами, источниками, целями публикации и запросами редактору."
+version = "1.0.0"
+id = "artifacts/ai-editorial-office"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21308
+
+[services.development]
+run = "pnpm --filter @workspace/ai-editorial-office run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ai-editorial-office", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ai-editorial-office/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21308"
+BASE_PATH = "/"

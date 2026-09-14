@@ -1,0 +1,12 @@
+Обнови прототип по TASK_REPLIT_UI_PROTOTYPE.md v2.3 и DELTA_REPLIT_2026-09-14.md.
+
+1. В mock-слое: код NO_USABLE_COMMAND_CONTENT возвращать с http_status 422 вместо 501. Добавить код ATTACHMENT_CONTENT_NOT_ACCEPTED с http_status 422.
+2. В mock-ответе GET /api/v1/enums добавить в VISUAL_STATUS значение NOT_REQUIRED. Порядок значений: VISUAL_READY, VISUAL_READY_LICENSE_CHECK, VISUAL_READY_WITH_FALLBACK, VISUAL_SCHEME_RECOMMENDED, NOT_REQUIRED, VISUAL_BLOCKED, LINK_PREVIEW_ONLY. Свой список статусов в коде компонентов не создавать: значения читаются из enums.
+3. В mock-ответе подачи команды добавить поле parsed_command_subtype. На экране показать его рядом с parsed_command_type, подписью «подтип, справочно».
+4. На экране подачи команды добавить четвёртый исход: ATTACHMENT_CONTENT_NOT_ACCEPTED, 422, у списка вложений, текстом «в MVP принимаются только метаданные вложения». В запросе не должно быть полей под содержимое файла, base64 и multipart/form-data.
+5. В mock-данных публикационного пакета сделать visual_package_id необязательным и добавить вычисляемый признак visual_not_required. Добавить два примера: пакет без визуала с NOT_REQUIRED и ready_for_review = true без причины VISUAL_PACKAGE_MISSING; пакет без визуала и без решения с ready_for_review = false и причиной VISUAL_PACKAGE_MISSING.
+6. На экране пакета: при NOT_REQUIRED или visual_not_required показывать пакет готовым с подписью «визуал не требуется — решение редактора». ready_for_review и blocking_reasons приходят от mock-слоя, интерфейс их не вычисляет.
+7. На экране визуального пакета: при NOT_REQUIRED показывать только visual_status, visual_risk и publication_instruction, остальные поля — прочерком. Не подставлять значения по умолчанию.
+8. Не менять состав экранов, маршруты и конверты ответов. Не добавлять полей, которых нет в S09. Если экран нельзя собрать из объявленных операций, не изобретать поле, а вернуть список расхождений текстом.
+
+Верни: ссылку на обновлённый прототип и список расхождений с контрактом, если они обнаружены.
